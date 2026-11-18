@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Radar: pre-token protocols ranked by implied value</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <p class="eyebrow">Token Radar</p>
+  <h1>Pre-token protocols, ranked by what a launch would be worth</h1>
+  <p id="summary" class="summary">Loading the sealed snapshot…</p>
+  <details class="method">
+    <summary>How the value is worked out</summary>
+    <p>Every protocol below <strong>records no token</strong> in the sealed DefiLlama snapshot: no market cap, no CoinGecko id, no ticker. That is the record, not proof — a protocol may still have a token its record does not carry. Wrapped, staked and bridged products of tokens that already trade are kept off the board, as are exchanges and versioned pools: a wrapped token is not a launch waiting to happen.</p>
+    <p>Implied value = TVL × peer multiple × growth factor × age factor × chain factor. The peer multiple is the median market-cap-to-TVL ratio of the protocols in the same category whose token already trades (the global median when a category has fewer than three). Growth is the 7-day TVL change, clamped. Age is how long DefiLlama has tracked the protocol. Nothing here is a hardcoded list of names: the same formula scores every row, from the snapshot's own figures.</p>
+    <p>Implied values are this radar's own estimates, not a prediction that a token will be issued or what it would trade at. This page is not financial advice.</p>
+  </details>
+</header>
+<nav class="controls" aria-label="Board controls">
+  <div class="views" role="tablist" aria-label="Views">
+    <button id="view-board" role="tab" aria-selected="true">Board</button>
+    <button id="view-live" role="tab" aria-selected="false">Already trading</button>
+  </div>
+  <label>Search <input id="q" type="search" placeholder="Name or slug…" autocomplete="off"></label>
+  <label>Category <select id="category"><option value="">All categories</option></select></label>
+  <label>Chain <select id="chain"><option value="">All chains</option></select></label>
+  <label>Sort <select id="sort">
+    <option value="rank">Implied value (rank)</option>
+    <option value="tvl">TVL</option>
+    <option value="growth">7-day growth</option>
+    <option value="age">Age on record</option>
+  </select></label>
+  <label class="check"><input id="watchlist-only" type="checkbox"> Watchlist only</label>
+</nav>
+<main>
+  <section id="board-view" aria-label="Ranked board">
+    <p id="count" class="count"></p>
+    <div class="table-wrap">
+      <table id="board">
+        <thead><tr>
+          <th>Rank</th><th>Protocol</th><th>Category</th><th>Chains</th>
+          <th class="num">TVL</th><th class="num">7d</th><th class="num">Implied value</th><th>Farm</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+  <section id="detail-view" hidden aria-label="Protocol detail"></section>
+  <section id="live-view" hidden aria-label="Protocols whose token already trades">
+    <p class="count">These protocols already record a token, so the market prices them — they are the peers the model calibrates against, not rows of the ranked board.</p>
+    <div class="table-wrap">
+      <table id="live">
+        <thead><tr>
+          <th>Protocol</th><th>Category</th><th>Chains</th>
+          <th class="num">TVL</th><th class="num">Market cap</th><th class="num">7d</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+<footer>
+  <p id="source"></p>
+  <p>Farm plans are generic steps derived from each protocol's category, chains, size and age. They do not claim a points program or airdrop exists. Verify everything on the protocol's own pages before you act.</p>
+</footer>
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
